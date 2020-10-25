@@ -1,0 +1,96 @@
+<template>
+  <div>
+    <div class="flex items-center flex-col align-middle h-auto min-h-screen">
+      <div
+        class="z-20 flex flex-col justify-center align-middle self-center w-11/12 md:w-7/12 my-12 py-12 px-12 card border-gray-500 border rounded-md"
+      >
+        <p
+          class="text-gray-900 mx-5 font-bold text-left pt-2 text-base sm:text-lg md:text-2xl lg:text-2xl mb-2"
+        >
+          Proveedor de Identidad de la UAH
+        </p>
+
+        <p
+          class="text-gray-700 mx-5 text-left  text-base sm:text-sm md:text-md lg:text-md mb-4"
+        >
+          Introduce el nombre de usuario y la contraseña para la conexión.
+        </p>
+
+        <label
+          for="email"
+          class="text-gray-900 font-semibold text-left mx-5 pt-2 text-base sm:text-lg md:text-xl lg:text-xl mb-2"
+        >
+          Usuario
+        </label>
+        <input
+          id="email"
+          v-model="email"
+          type="text"
+          class="bg-white focus:outline-none self-center text-center w-11/12 border focus:border-blue-900 py-2 block appearance-none leading-normal"
+          @:keyup.enter="login"
+        />
+
+        <label
+          for="password"
+          class="text-gray-900 font-semibold text-left mx-5 pt-2 text-base sm:text-lg md:text-xl lg:text-xl mb-2"
+        >
+          Contraseña
+        </label>
+        <input
+          id="password"
+          v-model="password"
+          type="password"
+          class="bg-white focus:outline-none self-center text-center w-11/12 focus:shadow-outline border border-gray-300 py-2 block appearance-none leading-normal"
+          @:keyup.enter="login"
+        />
+        <div>
+          <button
+            class="bg-blue-800 hover:bg-blue-900 text-white font-bold w-11/12 mt-4 py-2 px-4"
+            @click="login"
+          >
+            Aceptar
+          </button>
+        </div>
+      </div>
+      <p @click="crearUsuario" style="cursor: pointer">crear usuario</p>
+      <p @click="Reset" style="cursor: pointer">Reset</p>
+    </div>
+  </div>
+</template>
+
+
+<script>
+export default {
+  name: "Login",
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+
+  methods: {
+    async crearUsuario() {
+      let user = {};
+      user.email = "a";
+      user.role = "b";
+      await this.$store.dispatch("login", { user });
+    },
+
+    async Reset() {
+      await this.$store.dispatch("reset", {});
+    },
+  },
+};
+</script>
+
+<style scoped>
+.card {
+  background-color: #fafafa;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.card:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+</style>
