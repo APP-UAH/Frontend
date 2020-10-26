@@ -1,9 +1,9 @@
 <template>
   <div>   
     <div class="flex items-center flex-col align-middle h-auto min-h-screen">
-      <div class="h-4 sm:h-8 md:h-10 lg:h-12 xl:h-14 w-full bg-blue-800 border-t-40 border-gray-600 w-full">
+      <div class="h-4 sm:h-8 md:h-10 lg:h-12 xl:h-14 w-full bg-blue-800 border-t-40 border-gray-600">
       </div>
-      <img class="ml-12 mt-4 object-contain  sm:h-8 md:h-10 lg:h-12 xl:h-14 w-full object-left" src="../assets/images/logo-uah.png">
+      <img class="ml-12 mt-4 object-contain  sm:h-8 md:h-10 lg:h-12 xl:h-14 w-full object-left" src="../assets/images/logo-uah.png" alt="Logo UAH">
       <div
         class="z-20 flex flex-col justify-center align-middle self-center w-11/12 md:w-7/12 my-12 py-12 px-12 card border-gray-500 border rounded-md"
       >
