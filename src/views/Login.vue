@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login h-min-screen h-full md:h-screen">
     <div
       class="h-12 sm:h-12 md:h-14 w-screen bg-blue-800 border-t-40 border-gray-600 min-w-full"
     ></div>
@@ -111,6 +111,10 @@ export default {
 </script>
 
 <style scoped>
+.login {
+  overflow: hidden;
+}
+
 .card {
   background-color: #fff;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
