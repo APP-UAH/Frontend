@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-        class="z-20 flex flex-row justify-center align-middle self-center w-11/12 md:w-4/12 my-12 py-12 px-12 card border-gray-500 border rounded-md"
+        class="z-20 flex flex-row justify-center align-middle self-center w-full my-12 py-12 px-12 card border-gray-500 border rounded-md"
       >
       <p> {{title}} </p>
       <router-link :to="route"> 
