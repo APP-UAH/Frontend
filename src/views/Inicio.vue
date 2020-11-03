@@ -12,10 +12,10 @@
     <div class="w-full container">
       <div
         v-if="this.tipoUsuario == 'administracion'"
-        class="grid grid-cols-3 gap-12"
+        class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-6 md:gap-8 justify-center align-middle"
       >
         <div v-for="action in accionesAdmin" :key="action">
-          <div class="col-span-1">
+          <div class="col-span-3 sm:col-span-4 md:col-span-1">
             <TarjetaInicio
               :title="action.title"
               :route="action.route"
