@@ -8,8 +8,7 @@
       src="../assets/images/logo-uah.png"
       alt="Logo UAH"
     />
-    <p @click="Reset" style="cursor: pointer">Reset</p>
-    <div class="w-full container">
+    <div class="w-full container mt-10">
       <div
         v-if="this.tipoUsuario == 'administracion'"
         class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-6 md:gap-8 justify-center align-middle"
@@ -28,6 +27,14 @@
           <TarjetaInicio :title="titulos"></TarjetaInicio>
         </div>
       </div>
+    </div>
+    <div class="absolute inset-x-0 bottom-0">
+      <button
+        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mb-10 rounded"
+        @click="Reset"
+      >
+        Cerrar sesión
+      </button>
     </div>
   </div>
 </template>
@@ -61,9 +68,17 @@ export default {
 </script>
 
 <style scoped>
-
-.inicio{
+.inicio {
   overflow: hidden;
+}
+
+button {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+button:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .card {
