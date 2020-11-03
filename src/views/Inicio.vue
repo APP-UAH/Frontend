@@ -13,7 +13,7 @@
         v-if="this.tipoUsuario == 'administracion'"
         class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-6 md:gap-8 justify-center align-middle"
       >
-        <div v-for="action in accionesAdmin" :key="action">
+        <div v-for="action in accionesAdmin" :key="action.title">
           <div class="col-span-3 sm:col-span-4 md:col-span-1">
             <TarjetaInicio
               :title="action.title"
@@ -59,9 +59,22 @@ export default {
   },
   methods: {
     async Reset() {
-      await this.$store
-        .dispatch("reset", {})
-        .then(() => this.$router.push("/login"));
+      this.$swal({
+        title: "Cerrar sesión",
+        text: "¿Estás seguro que quieres cerrar la sesión?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, cerrar sesión",
+        cancelButtonText: "Cancelar",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await this.$store
+            .dispatch("reset", {})
+            .then(() => this.$router.push("/login"));
+        }
+      });
     },
   },
 };
