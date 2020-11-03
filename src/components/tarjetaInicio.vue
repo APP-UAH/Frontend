@@ -1,14 +1,12 @@
 <template>
   <div>
-    <div
+    <router-link :to="route">
+      <div
         class="z-20 flex flex-row justify-center align-middle self-center w-full my-12 py-12 px-12 card border-gray-500 border rounded-md"
       >
-      <p> {{title}} </p>
-      <router-link :to="route"> 
-          <p> A </p>
-      </router-link>
-
+        <p>{{ title }}</p>
       </div>
+    </router-link>
   </div>
 </template>
 
@@ -16,12 +14,11 @@
 export default {
   name: "TarjetaInicio",
   props: {
-      title: String,
-      route: {type: String, required: true}
-  }
+    title: String,
+    route: { type: String, required: true },
+  },
 };
 </script>
-
 
 <style scoped>
 .card {
