@@ -8,7 +8,10 @@ import VueToast from "vue-toast-notification";
 import "vue-toast-notification/dist/theme-default.css";
 import i18n from "./i18n";
 import "./registerServiceWorker";
+import VueSweetalert2 from "vue-sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
+Vue.use(VueSweetalert2);
 Vue.use(VueToast);
 
 Vue.config.productionTip = false;

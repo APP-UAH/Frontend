@@ -5,7 +5,12 @@ import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex);
 
 const getDefaultState = () => {
-  return {};
+  return {
+    user: {
+      email: "",
+      role: "",
+    },
+  };
 };
 
 export default new Vuex.Store({
@@ -13,9 +18,22 @@ export default new Vuex.Store({
   plugins: [createPersistedState()],
   state: getDefaultState(),
 
-  actions: {},
+  actions: {
+    login: ({ commit }, { user }) => commit("SET_LOGIN", user),
+    reset: ({ commit }) => commit("RESET", ""),
+  },
 
-  mutations: {},
+  mutations: {
+    SET_LOGIN: (state, user) => {
+      state.user = user;
+    },
 
-  getters: {},
+    RESET: (state) => {
+      Object.assign(state, getDefaultState());
+    },
+  },
+
+  getters: {
+    getUser: (state) => state.user,
+  },
 });
