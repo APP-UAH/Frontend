@@ -4,6 +4,8 @@ import store from "../store/index";
 import First from "../views/First.vue";
 import Login from "../views/Login.vue";
 import Inicio from "../views/Inicio.vue";
+import Prueba1 from "../views/prueba1";
+import Prueba2 from "../views/prueba2";
 
 Vue.use(VueRouter);
 
@@ -32,6 +34,22 @@ const routes = [
       haveUser: true,
     },
   },
+  {
+    path: "/prueba1",
+    name: "prueba1",
+    component: Prueba1,
+    meta: {
+      haveUser: true,
+    },
+  },
+  {
+    path: "/prueba2",
+    name: "prueba2",
+    component: Prueba2,
+    meta: {
+      haveUser: true,
+    },
+  }
 ];
 
 const router = new VueRouter({
@@ -40,18 +58,19 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   if (to.path == "/") next("/login");
   if (to.meta.haveUser) {
-    let temp = store.getters.getUser;
-    if (temp.user) {
+    let temp = await store.getters.getUser;
+    if (temp.email) {
       if (to.path == "/inicio") next();
+      else if (to.path=="/prueba1" || to.path=="/prueba2") next();
       else next("/inicio");
     }
   }
   if (to.path == "/login") {
     let temp = store.getters.getUser;
-    if (temp.user) next("/inicio");
+    if (temp.email) next("/inicio");
     else next();
   }
 });

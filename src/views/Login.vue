@@ -66,7 +66,7 @@
         <div>
           <button
             class="bg-blue-800 hover:bg-blue-900 text-white font-bold w-11/12 mt-4 py-2 px-4"
-            @click="login"
+            @click="crearUsuario"
           >
             Aceptar
           </button>
@@ -99,7 +99,11 @@ export default {
       let user = {};
       user.email = "a";
       user.role = "b";
-      await this.$store.dispatch("login", { user });
+      await this.$store.dispatch("login", { user }).then(()=>{
+              this.$router.push({name:"inicio"})
+      });
+      console.log("Crear usuario... ")
+      
     },
 
     async Reset() {
