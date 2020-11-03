@@ -1,14 +1,14 @@
 <template>
   <div>
+    <div
+      class="h-12 sm:h-12 md:h-14 w-screen bg-blue-800 border-t-40 border-gray-600 min-w-full"
+    ></div>
+    <img
+      class="ml-12 mt-4 h-12 object-contain xl:h-14 w-full object-left"
+      src="../assets/images/logo-uah.png"
+      alt="Logo UAH"
+    />
     <div class="flex items-center flex-col align-middle h-auto min-h-screen">
-      <div
-        class="h-12 sm:h-12 md:h-14 w-screen bg-blue-800 border-t-40 border-gray-600 min-w-full"
-      ></div>
-      <img
-        class="ml-12 mt-4 h-12 object-contain xl:h-14 w-full object-left"
-        src="../assets/images/logo-uah.png"
-        alt="Logo UAH"
-      />
       <div
         class="z-20 flex flex-col justify-center align-middle self-center w-11/12 md:w-4/12 my-12 py-12 px-12 card border-gray-500 border rounded-md"
       >
@@ -78,7 +78,6 @@
   </div>
 </template>
 
-
 <script>
 export default {
   name: "Login",
@@ -90,20 +89,18 @@ export default {
   },
 
   methods: {
-
     login() {
       console.log("Botón pulsado");
     },
-    
+
     async crearUsuario() {
       let user = {};
       user.email = "a";
       user.role = "administracion";
-      await this.$store.dispatch("login", { user }).then(()=>{
-              this.$router.push({name:"inicio"})
+      await this.$store.dispatch("login", { user }).then(() => {
+        this.$router.push({ name: "inicio" });
       });
-      console.log("Crear usuario... ")
-      
+      console.log("Crear usuario... ");
     },
 
     async Reset() {
