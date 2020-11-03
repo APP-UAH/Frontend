@@ -1,10 +1,15 @@
 <template>
-  <div>
+  <div class="mx-4 md:mx-0">
     <router-link :to="route">
-      <div
-        class="z-20 flex flex-row justify-center align-middle self-center w-full my-12 py-12 px-12 card border-gray-500 border rounded-md"
-      >
-        <p>{{ title }}</p>
+      <div class="w-full rounded card">
+        <img
+          class="h-32 md:h-48 lg:h-56 w-full"
+          src="https://picsum.photos/400"
+          alt="Sunset in the mountains"
+        />
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">{{ this.title }}</div>
+        </div>
       </div>
     </router-link>
   </div>
@@ -16,7 +21,7 @@ export default {
   props: {
     title: String,
     route: { type: String, required: true },
-  },
+  }, 
 };
 </script>
 
