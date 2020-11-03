@@ -98,7 +98,7 @@ export default {
     async crearUsuario() {
       let user = {};
       user.email = "a";
-      user.role = "b";
+      user.role = "administracion";
       await this.$store.dispatch("login", { user }).then(()=>{
               this.$router.push({name:"inicio"})
       });
