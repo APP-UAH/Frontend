@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       accionesAdmin: [
-        { title: "Reservar aulas", route: "/calendario" },
+        { title: "Reservar aulas", route: "/prueba2" },
         { title: "Ver informes", route: "/prueba2" },
         { title: "Aceptar reservas", route: "" },
       ],
