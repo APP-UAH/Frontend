@@ -4,7 +4,7 @@ import store from "../store/index";
 import First from "../views/First.vue";
 import Login from "../views/Login.vue";
 import Inicio from "../views/Inicio.vue";
-import Prueba1 from "../views/prueba1";
+import Calendar from "../views/Calendar.vue"
 import Prueba2 from "../views/prueba2";
 
 Vue.use(VueRouter);
@@ -35,9 +35,9 @@ const routes = [
     },
   },
   {
-    path: "/prueba1",
-    name: "prueba1",
-    component: Prueba1,
+    path: "/calendario",
+    name: "calendario",
+    component: Calendar,
     meta: {
       haveUser: true,
     },
@@ -64,7 +64,7 @@ router.beforeEach(async (to, from, next) => {
     let temp = await store.getters.getUser;
     if (temp.email) {
       if (to.path == "/inicio") next();
-      else if (to.path=="/prueba1" || to.path=="/prueba2") next();
+      else if (to.path=="/calendario" || to.path=="/prueba2") next();
       else next("/inicio");
     }
   }
