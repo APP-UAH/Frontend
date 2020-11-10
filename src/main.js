@@ -10,6 +10,9 @@ import i18n from "./i18n";
 import "./registerServiceWorker";
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
+import PortalVue from "portal-vue";
+
+Vue.use(PortalVue);
 
 Vue.use(VueSweetalert2);
 Vue.use(VueToast);
