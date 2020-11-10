@@ -10,21 +10,15 @@
     />
     <div class="w-full container mt-10">
       <div
-        v-if="this.tipoUsuario == 'administracion'"
         class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-6 md:gap-8 justify-center align-middle"
       >
-        <div v-for="action in accionesAdmin" :key="action.title">
+        <div v-for="action in this.getAcciones" :key="action.title">
           <div class="col-span-3 sm:col-span-4 md:col-span-1">
             <TarjetaInicio
               :title="action.title"
               :route="action.route"
             ></TarjetaInicio>
           </div>
-        </div>
-      </div>
-      <div v-else>
-        <div v-for="titulos in acciones" :key="titulos">
-          <TarjetaInicio :title="titulos"></TarjetaInicio>
         </div>
       </div>
     </div>
@@ -49,13 +43,24 @@ export default {
   data() {
     return {
       accionesAdmin: [
-        { title: "Reservar aulas", route: "/prueba1" },
+        { title: "Reservar aulas", route: "/calendario" },
         { title: "Ver informes", route: "/prueba2" },
         { title: "Aceptar reservas", route: "" },
       ],
-      acciones: ["Reservar aulas", "Ver calendario"],
+      accionesNormal: [
+        { title: "Reservar aulas", route: "/calendario" },
+        { title: "Ver calendario", route: "/prueba2" },
+      ],
+      acciones: [],
       tipoUsuario: this.$store.getters.getUser.role,
     };
+  },
+  computed: {
+    getAcciones: function () {
+        return this.tipoUsuario == "administracion"
+          ? this.accionesAdmin
+          : this.accionesNormal;
+    },
   },
   methods: {
     async Reset() {
