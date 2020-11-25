@@ -18,8 +18,8 @@
           {{ event_information.data.planner }}
         </span>
         <span class="time"
-          >{{ event_information.start_time | formatToHours }} -
-          {{ event_information.end_time | formatToHours }}</span
+          >{{ event_information.start_time.split("T")[1].split("+")[0] }} -
+          {{ event_information.start_time.split("T")[1].split("+")[0] }}</span
         >
       </div>
     </kalendar>
@@ -28,8 +28,8 @@
 <script>
 const _existing_events = [
   {
-    from: "2020-11-10T16:30:00+02:00",
-    to: "2022-11-10T18:30:00+02:00",
+    from: "2020-11-10T16:30",
+    to: "2022-11-10T18:30",
     data: {
       title: "Clase de Patrones de Software",
       class: "NA5",

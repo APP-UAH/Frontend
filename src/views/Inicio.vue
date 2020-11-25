@@ -48,8 +48,8 @@ export default {
         { title: "Aceptar reservas", route: "" },
       ],
       accionesNormal: [
-        { title: "Reservar aulas", route: "/calendario" },
-        { title: "Ver calendario", route: "/prueba2" },
+        { title: "Reservar aulas", route: "/prueba2" },
+        { title: "Ver calendario", route: "/calendario" },
       ],
       acciones: [],
       tipoUsuario: this.$store.getters.getUser.role,
