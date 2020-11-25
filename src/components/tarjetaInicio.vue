@@ -3,7 +3,7 @@
     <router-link :to="route">
       <div class="w-full rounded card">
         <img
-          class="h-32 md:h-48 lg:h-56 w-full"
+          class="h-32 md:h-48 lg:h-56 w-full rounded-t"
           src="https://picsum.photos/400"
           alt="Sunset in the mountains"
         />
