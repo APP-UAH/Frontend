@@ -1,5 +1,15 @@
 <template>
   <div>
+    <div
+      class="h-12 sm:h-12 md:h-14 w-screen bg-blue-800 border-t-40 border-gray-600 min-w-full"
+    ></div>
+    <router-link to="/inicio">
+      <img
+        class="ml-12 mt-4 h-12 object-contain xl:h-14 w-full object-left"
+        src="../assets/images/logo-uah.png"
+        alt="Logo UAH"
+      />
+    </router-link>
     <kalendar :configuration="calendar_settings" :events.sync="events">
       <!-- CREATED CARD SLOT -->
       <div
@@ -118,7 +128,7 @@ $red: #f61067;
     svg {
       width: 18px;
       height: 18px;
-      fill: white;
+      fill: #fafafa;
     }
   }
 
