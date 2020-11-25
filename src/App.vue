@@ -6,8 +6,7 @@
 
 <script>
 export default {
-  components: {
-  },
+  components: {},
   data() {
     return {
       refreshing: false,
@@ -62,7 +61,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background-color: #fafafa;
+  background-color: white;
   color: #2c3e50;
 }
 
@@ -71,12 +70,12 @@ export default {
   z-index: 100;
   margin: 10px;
   font-size: 20px;
-  background-color: #fafafa;
+  background-color: white;
   float: right;
   right: 0;
 }
 select {
-  background-color: #fafafa;
+  background-color: white;
   font-size: 20px !important;
   cursor: pointer !important;
 }
