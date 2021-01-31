@@ -113,7 +113,7 @@ export default {
       console.log(res);
       if (res.msg === "Logged correctly") {
         let type = res.type;
-        let user = { email: this.email, type: type };
+        let user = { email: this.email, role: type };
         await this.$store.dispatch("login", { user }).then(() => {
           console.log("Test")
           this.$router.push({ name: "inicio" });

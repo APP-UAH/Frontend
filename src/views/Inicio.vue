@@ -57,9 +57,7 @@ export default {
   },
   computed: {
     getAcciones: function () {
-        return this.tipoUsuario == "administracion"
-          ? this.accionesAdmin
-          : this.accionesNormal;
+      return this.tipoUsuario == 2 ? this.accionesAdmin : this.accionesNormal;
     },
   },
   methods: {
