@@ -66,19 +66,19 @@
         <div>
           <button
             class="bg-blue-800 hover:bg-blue-900 text-white font-bold w-11/12 mt-4 py-2 px-4"
-            @click="crearUsuario"
+            @click="login"
           >
             Aceptar
           </button>
         </div>
       </div>
-      <p @click="crearUsuario" style="cursor: pointer">crear usuario</p>
-      <p @click="Reset" style="cursor: pointer">Reset</p>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Login",
   data() {
@@ -89,18 +89,36 @@ export default {
   },
 
   methods: {
-    login() {
-      console.log("Botón pulsado");
-    },
-
-    async crearUsuario() {
-      let user = {};
-      user.email = "a";
-      user.role = "administracion";
-      await this.$store.dispatch("login", { user }).then(() => {
-        this.$router.push({ name: "inicio" });
+    async login() {
+      let data = JSON.stringify({
+        username: this.email,
+        password: this.password,
       });
-      console.log("Crear usuario... ");
+
+      let config = {
+        method: "post",
+        url: "http://localhost:3000/api/login",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      let res = await axios(config)
+        .then((response) => response.data)
+        .catch(function (error) {
+          console.log(error);
+        });
+
+      console.log(res);
+      if (res.msg === "Logged correctly") {
+        let type = res.type;
+        let user = { email: this.email, type: type };
+        await this.$store.dispatch("login", { user }).then(() => {
+          console.log("Test")
+          this.$router.push({ name: "inicio" });
+        });
+      }
     },
 
     async Reset() {
