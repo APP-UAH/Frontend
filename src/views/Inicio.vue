@@ -13,11 +13,12 @@
       <div
         class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-6 md:gap-8 justify-center align-middle"
       >
-        <div v-for="action in this.getAcciones" :key="action.title">
+        <div v-for="(action, index) in this.getAcciones" :key="action.title">
           <div class="col-span-3 sm:col-span-4 md:col-span-1">
             <TarjetaInicio
               :title="action.title"
               :route="action.route"
+              :index="index"
             ></TarjetaInicio>
           </div>
         </div>
@@ -50,6 +51,7 @@ export default {
         { title: "Aceptar reservas", route: "" },
         { title: "Gestión de usuarios", route: "/usuarios" },
         { title: "Asignación de asignaturas", route: "/asignaturas" },
+        { title: "Aceptar reservas", route: "/pendingReservations" },
       ],
       accionesNormal: [
         { title: "Reservar aulas", route: "/prueba2" },

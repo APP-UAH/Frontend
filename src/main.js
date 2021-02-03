@@ -6,8 +6,6 @@ import "@/assets/style/tailwind.css";
 import "@/assets/style/material-icon.css";
 import VueToast from "vue-toast-notification";
 import "vue-toast-notification/dist/theme-default.css";
-import i18n from "./i18n";
-import "./registerServiceWorker";
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import PortalVue from "portal-vue";
@@ -22,6 +20,5 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
-  i18n,
   render: (h) => h(App),
 }).$mount("#app");

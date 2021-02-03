@@ -8,6 +8,7 @@ import Calendar from "../views/Calendar.vue";
 import Prueba2 from "../views/prueba2";
 import Usuarios from "../views/Usuarios.vue";
 import Asignaturas from "../views/Asignaturas.vue";
+import PendingReservations from "../views/PendingReservations.vue"
 
 Vue.use(VueRouter);
 
@@ -67,6 +68,15 @@ const routes = [{
             haveUser: true,
         },
     }
+  },
+  {
+    path: "/pendingReservations",
+    name: "PendingReservations",
+    component: PendingReservations,
+    meta: {
+      haveUser: true,
+    },
+  },
 ];
 
 const router = new VueRouter({
@@ -85,6 +95,7 @@ router.beforeEach(async(to, from, next) => {
                 to.path == "/calendario" ||
                 to.path == "/prueba2" ||
                 to.path == "/usuarios" ||
+                to.path == "/pendingReservations" ||
                 to.path == "/asignaturas"
             )
                 next();
