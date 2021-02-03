@@ -15,6 +15,7 @@
         <div v-for="pending in this.pendingReservations" :key="pending.id">
           <div class="col-span-3 sm:col-span-4 md:col-span-1">
             <ReservationCard
+              :id="pending.id"
               :begin="pending.begin"
               :end="pending.end"
               :room="pending.room"

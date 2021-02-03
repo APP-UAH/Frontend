@@ -17,14 +17,14 @@
         <div class="flex flex-row w-full justify-evenly">
           <button
             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mb-10 rounded"
-            @click="$router.go(-1)"
+            @click="sendUpdateToServer(true)"
             :disabled="this.updating"
             :class="[this.updating ? 'cursor-wait' : '']"
           >
             Aceptar reserva</button
           ><button
             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mb-10 rounded"
-            @click="$router.go(-1)"
+            @click="sendUpdateToServer(false)"
             :disabled="this.updating"
             :class="[this.updating ? 'cursor-wait' : '']"
           >
@@ -50,9 +50,12 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "TarjetaInicio",
   props: {
+    id: String,
     begin: Object,
     end: Object,
     room: Object,
@@ -101,6 +104,81 @@ export default {
         : this.$props.end.date.month) +
       "/" +
       this.$props.end.date.year;
+  },
+  methods: {
+    async sendUpdateToServer(isAccepted) {
+      this.updating = true;
+
+      let beginDateTime =
+        "" +
+        this.$props.begin.date.year +
+        "-" +
+        (this.$props.begin.date.month <= 9
+          ? "0" + this.$props.begin.date.month
+          : this.$props.begin.date.month) +
+        "-" +
+        (this.$props.begin.date.day <= 9
+          ? "0" + this.$props.begin.date.day
+          : this.$props.begin.date.day) +
+        "T" +
+        (this.$props.begin.time.hour <= 9
+          ? "0" + this.$props.begin.time.hour
+          : this.$props.begin.time.hour) +
+        ":" +
+        (this.$props.begin.time.minute <= 9
+          ? "0" + this.$props.begin.time.minute
+          : this.$props.begin.time.minute) +
+        ":" +
+        (this.$props.begin.time.second <= 9
+          ? "0" + this.$props.begin.time.second
+          : this.$props.begin.time.second);
+
+      let endDateTime =
+        "" +
+        this.$props.end.date.year +
+        "-" +
+        (this.$props.end.date.month <= 9
+          ? "0" + this.$props.end.date.month
+          : this.$props.end.date.month) +
+        "-" +
+        (this.$props.end.date.day <= 9
+          ? "0" + this.$props.end.date.day
+          : this.$props.end.date.day) +
+        "T" +
+        (this.$props.end.time.hour <= 9
+          ? "0" + this.$props.end.time.hour
+          : this.$props.end.time.hour) +
+        ":" +
+        (this.$props.end.time.minute <= 9
+          ? "0" + this.$props.end.time.minute
+          : this.$props.end.time.minute) +
+        ":" +
+        (this.$props.end.time.second <= 9
+          ? "0" + this.$props.end.time.second
+          : this.$props.end.time.second);
+
+      let data = {
+        id: this.$props.id,
+        begin: beginDateTime,
+        end: endDateTime,
+        state: isAccepted,
+        room_name: this.$props.room.name,
+      };
+
+      try {
+        axios
+          .patch("http://localhost:8080/AppUah/reservations/update", data)
+          .then((res) => {
+            console.log(res);
+            this.accepted = res.data == "La reserva ha sido aceptada";
+            this.pending = false;
+          });
+      } catch (e) {
+        console.log(e);
+      } finally {
+        this.updating = false;
+      }
+    },
   },
 };
 </script>
