@@ -94,7 +94,7 @@ export default {
         username: this.email,
         password: this.password,
       });
-
+      console.log(data)
       let config = {
         method: "post",
         url: "http://localhost:3000/api/login",
