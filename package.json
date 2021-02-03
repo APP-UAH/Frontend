@@ -13,6 +13,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.7.0",
     "kalendar-vue": "^2.1.1",
+    "luxon": "^1.25.0",
     "node-sass": "^5.0.0",
     "papaparse": "^5.3.0",
     "portal-vue": "^2.1.7",
@@ -20,12 +21,14 @@
     "sweetalert2": "^10.9.1",
     "tailwindcss": "^1.9.6",
     "vue": "^2.6.12",
+    "vue-datetime": "^1.0.0-beta.14",
     "vue-router": "^3.4.9",
     "vue-sweetalert2": "^4.1.1",
     "vue-template-compiler": "^2.6.12",
     "vue-toast-notification": "^0.6.0",
     "vuex": "^3.5.1",
-    "vuex-persistedstate": "^3.1.0"
+    "vuex-persistedstate": "^3.1.0",
+    "weekstart": "^1.0.1"
   },
   "devDependencies": {
     "@vue/cli-service": "~4.4.6",
