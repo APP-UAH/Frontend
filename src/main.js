@@ -11,7 +11,6 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import PortalVue from "portal-vue";
 
 Vue.use(PortalVue);
-
 Vue.use(VueSweetalert2);
 Vue.use(VueToast);
 

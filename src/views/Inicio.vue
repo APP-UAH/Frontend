@@ -47,14 +47,13 @@ export default {
   data() {
     return {
       accionesAdmin: [
-        { title: "Reservar aulas", route: "/prueba2" },
-        { title: "Aceptar reservas", route: "" },
+        { title: "Reservar aulas", route: "/reservation" },
         { title: "Gestión de usuarios", route: "/usuarios" },
         { title: "Asignación de asignaturas", route: "/asignaturas" },
-        { title: "Aceptar reservas", route: "/pendingReservations" },
+        { title: "Gestionar reservas pendientes", route: "/pendingReservations" },
       ],
       accionesNormal: [
-        { title: "Reservar aulas", route: "/prueba2" },
+        { title: "Reservar aulas", route: "/reservation" },
         { title: "Ver calendario", route: "/calendario" },
       ],
       acciones: [],
