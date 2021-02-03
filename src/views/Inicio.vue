@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <div class=" inset-x-0 bottom-0">
+    <div class=" inset-x-0 bottom-0 mt-10">
       <button
         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mb-10 rounded"
         @click="Reset"
