@@ -97,7 +97,7 @@ export default {
 
       let config = {
         method: "post",
-        url: "http://localhost:3000/api/login",
+        url: "http://localhost:8080/AppUah/login",
         headers: {
           "Content-Type": "application/json",
         },
@@ -111,7 +111,7 @@ export default {
         });
 
       console.log(res);
-      if (res.msg === "Logged correctly") {
+      if (res.msg === true) {
         let type = res.type;
         let user = { email: this.email, role: type };
         await this.$store.dispatch("login", { user }).then(() => {
