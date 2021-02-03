@@ -4,7 +4,7 @@
       <div class="w-full rounded card">
         <img
           class="h-32 md:h-48 lg:h-56 w-full rounded-t"
-          src="https://picsum.photos/400"
+          :src="this.url"
           alt="Sunset in the mountains"
         />
         <div class="px-6 py-4">
@@ -21,7 +21,13 @@ export default {
   props: {
     title: String,
     route: { type: String, required: true },
+    index: Number
   }, 
+  data(){
+    return{
+      url: "https://picsum.photos/400?random=" + this.$props.index 
+    }
+  }
 };
 </script>
 
