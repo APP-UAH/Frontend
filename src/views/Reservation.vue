@@ -35,7 +35,7 @@
             <p>Selecciona la hora de fin de la reserva</p>
             <datetime
               type="time"
-              v-model="date"
+              v-model="endDate"
               class="border w-8/12 mx-auto p-2"
               format="yyyy-MM-dd'T'HH:mm:ss"
             ></datetime>
@@ -48,6 +48,7 @@
         <div>
           <button
             class="bg-blue-800 hover:bg-blue-900 text-white font-bold w-6/12 mt-4 py-2 px-4"
+            @click="checkDate"
           >
             Buscar disponibilidad
           </button>
@@ -90,13 +91,20 @@ export default {
     async checkDate() {
       this.checking = true;
       this.dateSelected = true;
-      if (date < this.endDate) {
+      if (new Date(this.date) >= new Date(this.endDate)) {
         this.checking = false;
       } else {
+        let url =
+          this.userType == 1
+            ? "http://localhost:8080/AppUah/Classrooms"
+            : "http://localhost:8080/AppUah/Libraryrooms";
         try {
-          let temp = await axios
-            .get("http://localhost:8080/AppUah/reservations/pending")
-            .then((res) => res.data);
+          let temp1 = this.date.split(".000")[0];
+          let temp2 = this.endDate.split(".000")[0];
+          let data = { begin: temp1, end: temp2 };
+
+          let temp = await axios.post(url, data).then((res) => res.data);
+          console.log(temp);
         } catch (e) {
           console.log(e);
         } finally {
@@ -120,6 +128,11 @@ export default {
           : this.userType == 1
           ? "Reserva de aulas"
           : "Reserva de salas de biblioteca");
+  },
+  watch: {
+    date() {
+      this.endDate = this.date;
+    },
   },
 };
 </script>
