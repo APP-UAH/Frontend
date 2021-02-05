@@ -223,12 +223,27 @@ export default {
           type: this.reservationType,
         };
         if (this.reservationType == "subject") {
-          data['id_Subject'] = this.subjects[this.selectedSubjects].id;
-          data['plan_Subject'] = this.subjects[this.selectedSubjects].plan
+          data["id_Subject"] = this.subjects[this.selectedSubjects].id;
+          data["plan_Subject"] = this.subjects[this.selectedSubjects].plan;
         }
-        await axios
+        let res = await axios
           .post("http://localhost:8080/AppUah/reservations/create", data)
-          .then((res) => console.log(res));
+          .then((res) => res);
+        if (res.status == 200) {
+          this.$swal({
+            title: "Reserva creada",
+            text: "La reserva se ha creado con exito",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            allowOutsideClick: false,
+            confirmButtonText: "Volver al menú",
+          }).then(async (result) => {
+            if (result.isConfirmed) {
+              this.$router.push("/inicio");
+            }
+          });
+        }
       }
     },
   },
@@ -262,6 +277,8 @@ export default {
           this.subjects.push({ name: temp1[0], plan: temp1[1], id: temp1[2] });
         });
       }
+    }else{
+      this.reservationType = "library"
     }
   },
   watch: {
