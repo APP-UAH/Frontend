@@ -40,7 +40,7 @@
           <div class="grid grid-rows-1 grid-flow-row text-left">
             <select v-model="selected" class="mx-4 text-gray-900 mx-5 text-left 
                sm:text-xs md:text-xs lg:text-xs mb-2" >
-              <option v-for="p in plan" :key="p.code" >
+              <option v-for="p in planes" :key="p.id" >
                 {{p}}
               </option>
             </select>
@@ -54,28 +54,44 @@
         </p>
         <div class="mx-4">
           <div class="flex flex-row flex-wrap text-left">
-            <div v-for="asignatura in asignaturas.filter(elem => elem.plan == selected)" :key="asignatura.subject" class="m-2">
-              <input type="checkbox" :id="asignatura.subject" :value="asignatura.subject" v-model="asignaturaSelected">
-              <label :for="asignatura.subject"> {{asignatura.name}} </label>
+            <!-- .filter(elem => elem.plan == selected) -->
+            <div v-for="asignatura in asignaturas.filter(elem => elem.plan == selected)" :key="asignatura.code" class="m-2">
+              <input type="checkbox" :id="asignatura.code" :value="asignatura.name" v-model="asignaturaSelected">
+              <label :for="asignatura.code"> {{asignatura.name}} </label>
             </div>
+          </div>
+        </div>
+
+        <p
+          class="text-gray-700 mx-5 text-left text-base sm:text-sm md:text-md lg:text-md mb-4"
+        >
+          Seleccione tipo de usuario
+        </p>
+       <div>
+          <div class="grid grid-rows-1 grid-flow-row text-left">
+            <select v-model="userTypeSelected" class="mx-4 text-gray-900 mx-5 text-left 
+               sm:text-xs md:text-xs lg:text-xs mb-2" >
+              <option v-for="type in type" :key="type.value" :value="type.value" >
+                {{type.label}}
+              </option>
+            </select>
           </div>
         </div>
         
         <p
           class="text-gray-700 mx-5 text-left text-base sm:text-sm md:text-md lg:text-md mb-4"
         >
-          Seleccione usuario
+          Seleccione usuario 
         </p>
-       <div>
+       
           <div class="grid grid-rows-1 grid-flow-row text-left">
-            <select v-model="userSelected" class="mx-4 text-gray-900 mx-5 text-left 
+            <select v-model="studentSelected" class="mx-4 text-gray-900 mx-5 text-left 
                sm:text-xs md:text-xs lg:text-xs mb-2" >
-              <option v-for="user in users" :key="user.id" >
+              <option v-for="user in userList.filter(e => e.type == userTypeSelected)" :key="user.username" :value="user.name" >
                 {{user.name}}
               </option>
             </select>
           </div>
-        </div>
 
         <div>
           <button
@@ -96,15 +112,19 @@ export default {
   data(){
     return{
       selected: "",
-      plan: [],
+      planes: [],
       asignaturas: [],
       asignaturaSelected: [],      
-      users: [{name: "prueba", id:1}],
-      userSelected:""
+      userList: [],
+      userSelected:"",
+      userTypeSelected: "",
+      type: [{ label: "Estudiante", value: 0}, {label: "Profesor", value: 1}],
+     
     };       
   },
   mounted() { 
-    axios.get('http://localhost:3000/api/getAllSubjects')
+    
+    /*axios.get('http://localhost:3000/api/getAllSubjects')
           .then (response => {
             
             this.selected = response.data.response.planes[0];
@@ -115,7 +135,35 @@ export default {
             response.data.response.subject.forEach(element => {
               this.asignaturas.push(element)
             })
+          })*/
+    axios.get ('http://localhost:8080/AppUah/subjects/allsubjects')
+          .then ( response => {
+            this.selected = response.data.plans[0];
+            response.data.plans.forEach(element =>{
+              this.planes.push(element)
+            })
+
+            response.data.subjects.forEach(element =>{
+              this.asignaturas.push(element)
+            })
+         
+                
+            }
+          )
+    axios.get('http://localhost:8080/AppUah/get-all-users')
+          .then (response =>{
+           response.data.students.forEach( e  =>{
+             this.userList.push(e)
+           })
+           response.data.professors.forEach( e  =>{
+             this.userList.push(e)
+           })
+           console.log(this.userList)
           })
+          
+  },
+   created(){
+    
   },
   
   methods: {

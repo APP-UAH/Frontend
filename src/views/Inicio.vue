@@ -48,9 +48,10 @@ export default {
     return {
       accionesAdmin: [
         { title: "Reservar aulas", route: "/reservation" },
-        { title: "Gestión de usuarios", route: "/usuarios" },
         { title: "Asignación de asignaturas", route: "/asignaturas" },
         { title: "Gestionar reservas pendientes", route: "/pendingReservations" },
+        { title: "Gestión de profesores", route: "/profesores" },
+        { title: "Gestión de estudiantes", route: "/estudiantes" },
       ],
       accionesNormal: [
         { title: "Reservar aulas", route: "/reservation" },
