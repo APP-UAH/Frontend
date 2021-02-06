@@ -1,41 +1,44 @@
 <template>
   <div>
     <div
-      class="h-12 sm:h-12 md:h-14 w-screen bg-blue-800 border-t-40 border-gray-600 min-w-full"
+      class="h-12 sm:h-12 md:h-14 w-screen max-w-screen-full bg-blue-800 border-t-40 border-gray-600 min-w-full"
     ></div>
     <router-link to="/inicio">
       <img
-        class="ml-12 mt-4 h-12 object-contain xl:h-14 w-full object-left"
+        class="ml-12 mt-4 h-12 object-contain xl:h-14 max-w-screen-full object-left"
         src="../assets/images/logo-uah.png"
         alt="Logo UAH"
       />
     </router-link>
-    <kalendar :configuration="calendar_settings" :events.sync="events">
-      <!-- CREATED CARD SLOT -->
-      <div
-        slot="created-card"
-        slot-scope="{ event_information }"
-        class="details-card"
-      >
-        <h4 class="appointment-title">
-          {{ event_information.data.title }}
-        </h4>
-        <small>
-          {{ event_information.data.class }}
-        </small>
-        <span>
-          {{ event_information.data.subject ? "Profesor" : "Organizador" }}:
-          {{ event_information.data.planner }}
-        </span>
-        <span class="time"
-          >{{ event_information.start_time.split("T")[1].split("+")[0] }} -
-          {{ event_information.start_time.split("T")[1].split("+")[0] }}</span
+    <div class="max-w-full w-full px-10">
+      <kalendar :configuration="calendar_settings" :events.sync="events">
+        <!-- CREATED CARD SLOT -->
+        <div
+          slot="created-card"
+          slot-scope="{ event_information }"
+          class="details-card"
         >
-      </div>
-    </kalendar>
+          <p class="appointment-title text-xl"  style="font-size: 1.125rem !important">
+            {{ event_information.data.title }}
+          </p>
+          <p
+            class="text-lg appointment-class"
+            style="font-size: 1.115rem !important"
+          >
+            {{ event_information.data.class }}
+          </p>
+          <span class="time text-lg"
+            >{{ event_information.start_time.split("T")[1].split("+")[0] }} -
+            {{ event_information.start_time.split("T")[1].split("+")[0] }}</span
+          >
+        </div>
+      </kalendar>
+    </div>
   </div>
 </template>
 <script>
+import axios from "axios";
+
 const _existing_events = [
   {
     from: "2020-11-10T16:30",
@@ -86,21 +89,70 @@ export default {
     return {
       events: existing_events,
       calendar_settings: {
-        view_type: "week",
+        style: "material_design",
         cell_height: 10,
-        scrollToNow: false,
-        start_day: getCurrentDay(),
-        military_time: false,
-        day_starts_at: 6,
-        day_ends_at: 23,
-        overlap: true,
-        hide_dates: ["2020-11-09"],
-        hide_days: [6],
+        scrollToNow: true,
+        current_day: new Date(),
         read_only: true,
+        day_starts_at: 0,
+        day_ends_at: 24,
+        overlap: true,
+        hide_days: [5, 6],
         past_event_creation: true,
       },
       new_appointment: {},
     };
+  },
+  methods: {
+    lessThanNine(data) {
+      return parseInt(data) <= 9 ? "0" + data : data;
+    },
+  },
+  async beforeMount() {
+    let user = this.$store.getters.getUser.email;
+    console.log(user);
+    let tempFromServer = await axios
+      .post("http://localhost:8080/AppUah/reservations/user", {
+        username: "Alvaro",
+      })
+      .then((res) => res.data);
+
+    tempFromServer.forEach((el) => {
+      let temp = {};
+      temp["from"] =
+        el.reserva.begin.date.year +
+        "-" +
+        this.lessThanNine(el.reserva.begin.date.month) +
+        "-" +
+        this.lessThanNine(el.reserva.begin.date.day) +
+        "T" +
+        this.lessThanNine(el.reserva.begin.time.hour) +
+        ":" +
+        this.lessThanNine(el.reserva.begin.time.minute);
+      temp["to"] =
+        el.reserva.end.date.year +
+        "-" +
+        this.lessThanNine(el.reserva.end.date.month) +
+        "-" +
+        this.lessThanNine(el.reserva.end.date.day) +
+        "T" +
+        this.lessThanNine(el.reserva.end.time.hour) +
+        ":" +
+        this.lessThanNine(el.reserva.end.time.minute);
+
+      temp["data"] = {};
+      temp.data.title =
+        el.name_subject == "" || el.name_subject == null
+          ? "Reserva biblioteca"
+          : "Clase de " + el.name_subject;
+
+      temp.data.class =
+        el.name_subject == "" || el.name_subject == null
+          ? "Sala " + el.reserva.room.name
+          : "" + el.reserva.room.name;
+      temp.data.subject = el.name == "" && el.name == null;
+      this.$kalendar.addNewEvent(temp);
+    });
   },
 };
 </script>
@@ -140,6 +192,10 @@ $red: #f61067;
   &:hover .remove {
     opacity: 1;
   }
+}
+
+.appointment-class  {
+  font-size: 1.125rem !important;
 }
 
 .popup-event .buttons {
