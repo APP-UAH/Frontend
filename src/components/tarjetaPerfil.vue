@@ -1,31 +1,24 @@
 <template>
   <div class="mx-auto max-w-sm rounded card">
-      <div class="sm:flex sm:items-center px-6 py-4">
-        <img
-          class="block h-16 sm:h-24 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0"
-          src="https://randomuser.me/api/portraits/lego/4.jpg"
-          alt=""
-        />
-        <div class="sm:text-left sm:flex-grow">
-          <div class="mb-4">
-            <p class="text-xl leading-tight"> Nombre usuario: {{this.nombreUsuario}}</p>
-            <p class="text-sm leading-tight text-grey-dark">
-              DNI: 01234567A
-            </p>
-            <p class="text-sm leading-tight text-grey-dark">
-              Tipo de Usuario: {{this.rolUsuario}}
-            </p>
-          </div>
-          <div v-if="this.rolUsuario != 'Administrador'">
-            <button
-              class="text-xs font-semibold text-white font-bold py-2 px-4 mb-10 rounded  subjectButton"
-            >
-              Consultar Asignaturas
-            </button>
-          </div>
+    <div class="sm:flex sm:items-center px-6 py-4">
+      <img
+        class="block h-16 sm:h-24 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0"
+        src="https://randomuser.me/api/portraits/lego/4.jpg"
+        alt=""
+      />
+      <div class="sm:text-left sm:flex-grow">
+        <div class="mb-4">
+          <p class="text-xl leading-tight">
+            Nombre usuario: {{ this.nombreUsuario }}
+          </p>
+          <p class="text-sm leading-tight text-grey-dark">DNI: 01234567A</p>
+          <p class="text-sm leading-tight text-grey-dark">
+            Tipo de Usuario: {{ this.rolUsuario }}
+          </p>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -49,11 +42,18 @@ export default {
 .card:hover {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
-.subjectButton{
-    background-color: #2c5282;
-    color: #fff;
+.subjectButton {
+  background-color: #2c5282;
+  color: #fff;
 }
-.subjectButton:hover{
-    background-color: #325d92;
+.subjectButton:hover {
+  background-color: #325d92;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
