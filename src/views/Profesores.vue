@@ -108,7 +108,7 @@ export default {
         <p
           class="text-gray-700 mx-5 text-left text-base sm:text-sm md:text-md lg:text-md mb-4"
         >
-          Contraseña 
+          Contraseña
         </p>
         <div class="grid grid-rows-1 grid-flow-row text-left">
           <input
@@ -204,63 +204,75 @@ export default {
 import axios from "axios";
 export default {
   data: () => ({
-    msgName:         "",
-    msgSurname:      "",
-    msgUsername:     "",
-    msgPassword:     "",
-    msgPhoneNum:     "",
-    msgEmail:        "",
+    msgName: "",
+    msgSurname: "",
+    msgUsername: "",
+    msgPassword: "",
+    msgPhoneNum: "",
+    msgEmail: "",
     msgDepartamento: "",
-    isAssociated:    false
+    type: 1,
+    isAssociated: false,
   }),
 
   mounted() {},
 
   methods: {
-    async aniadirProfesor(){
-     let data = JSON.stringify({
-        type: "1",
-        username:       this.msgUsername,
-        password:       this.msgPassword,
-        name:           this.msgName,
-        surname:        this.msgSurname,
-        phone_number:   this.msgPhoneNum,
-        email:          this.msgEmail,
-        is_associated:  false,
-      });
-
-      console.log(type);
-      console.log(msgUsername);
-      console.log(password);
-      console.log(name);
-      console.log(surname);
-      console.log(phone_number);
-      console.log(email);
-      console.log(is_associated);
-
-
-
-      /*let config = {
-        method: "post",
-        url: "http://localhost:8080/AppUah/adduser",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: data,
+    async aniadirProfesor() {
+      let data = {
+        type: 1,
+        username: this.msgUsername,
+        password: this.msgPassword,
+        name: this.msgName,
+        surname: this.msgSurname,
+        phone_number: this.msgPhoneNum,
+        email: this.msgEmail,
+        is_associated: this.isAssociated,
       };
 
-      let res = await axios(config)
-        .then((response) => response.data)
+      console.log(data.type);
+      console.log(data.username);
+      console.log(data.password);
+      console.log(data.name);
+      console.log(data.surname);
+      console.log(data.phone_number);
+      console.log(data.email);
+      console.log(data.is_associated);
+
+      let res = await axios
+        .post("http://localhost:8080/AppUah/adduser", data)
+        .then((response) => response.status)
         .catch(function (error) {
           console.log(error);
         });
 
-      console.log(res);
-      if (res.data == "true") {
-        console.log("Profesor añadido a la BD")
-      }*/
-    }
-  }
+      if (res == 200) {
+        this.$swal({
+          title: "Usuario creado",
+          text: "El profesor se ha creado con exito",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          allowOutsideClick: false,
+          confirmButtonText: "Volver al menú",
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            this.$router.push("/inicio");
+          }
+        });
+      } else {
+        this.$swal({
+          title: "Usuario no creado",
+          text: "El profesor no se ha podido crear",
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonColor: "#ff0509",
+          allowOutsideClick: false,
+          confirmButtonText: "Volver al formulario",
+        });
+      }
+    },
+  },
 };
 </script>
 

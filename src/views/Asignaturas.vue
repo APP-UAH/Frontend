@@ -56,7 +56,7 @@
           <div class="flex flex-row flex-wrap text-left">
             <!-- .filter(elem => elem.plan == selected) -->
             <div v-for="asignatura in asignaturas.filter(elem => elem.plan == selected)" :key="asignatura.code" class="m-2">
-              <input type="checkbox" :id="asignatura.code" :value="asignatura.name" v-model="asignaturaSelected">
+              <input type="checkbox" :id="asignatura.code" :value="asignatura.code" v-model="asignaturaSelected">
               <label :for="asignatura.code"> {{asignatura.name}} </label>
             </div>
           </div>
@@ -87,8 +87,8 @@
           <div class="grid grid-rows-1 grid-flow-row text-left">
             <select v-model="userSelected" class="mx-4 text-gray-900 mx-5 text-left 
                sm:text-xs md:text-xs lg:text-xs mb-2" >
-              <option v-for="user in userList.filter(e => e.type == userTypeSelected)" :key="user.username" :value="user.name" >
-                {{user.surname}} , {{user.name}}
+              <option v-for="user in userList.filter(e => e.type == userTypeSelected)" :key="user.id" :value="user.username" >
+                {{user.name}}
               </option>
             </select>
           </div>
@@ -117,6 +117,7 @@ export default {
       asignaturaSelected: [],      
       userList: [],
       userSelected:"",
+      userTypeSelected: "",
       type: [{ label: "Estudiante", value: 0}, {label: "Profesor", value: 1}],
      
     };       
@@ -157,7 +158,11 @@ export default {
            response.data.professors.forEach( e  =>{
              this.userList.push(e)
            })
-           console.log(this.userList)
+
+           this.userList.forEach(e => {
+            console.log(e.name)
+           })
+           
           })
           
   },
@@ -200,10 +205,14 @@ export default {
       console.log(this.selected);
       console.log(this.userSelected);
       console.log(this.asignaturaSelected);
+      console.log(this.userTypeSelected);
+      
+
      let data = JSON.stringify({
         username: this.userSelected,
         plan: this.selected,
-        subjectCodes: this.asignaturaSelected
+        subjectCodes: this.asignaturaSelected,
+        type: this.userTypeSelected
       });
 
       let config = {

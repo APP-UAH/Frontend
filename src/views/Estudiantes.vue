@@ -45,7 +45,7 @@ export default {
         <p
           class="text-gray-900 mx-5 font-bold text-left pt-2 text-base sm:text-lg md:text-2xl lg:text-2xl mb-2"
         >
-          Gestión de profesores
+          Gestión de estudiantes
         </p>
 
         <p
@@ -121,7 +121,6 @@ export default {
           />
         </div>
 
-        
         <p
           class="text-gray-700 mx-5 text-left text-base sm:text-sm md:text-md lg:text-md mb-4"
         >
@@ -141,7 +140,6 @@ export default {
           </div>
         </div>
 
-        
         <div>
           <input
             type="checkbox"
@@ -168,39 +166,71 @@ export default {
 import axios from "axios";
 export default {
   data: () => ({
-   msgName: "",
-   msgSurname: "",
-   msgUsername: "",
-   msgPsw: "",
-   msgMail: "",
-   isDeputy: false
+    msgName: "",
+    msgSurname: "",
+    msgUsername: "",
+    msgPsw: "",
+    msgMail: "",
+    type: 0,
+    isDeputy: false,
   }),
 
   mounted() {},
 
   methods: {
-      async asignarStudent(){
-          let data = JSON.stringify({
-        type: "0",
-        username:       this.msgUsername,
-        password:       this.msgPsw,
-        name:           this.msgName,
-        surname:        this.msgSurname,
-        email:          this.msgMail,
-        isDeputy:       false,
-      });
-      
+    async asignarStudent() {
+      let data = {
+        type: 0,
+        username: this.msgUsername,
+        password: this.msgPsw,
+        name: this.msgName,
+        surname: this.msgSurname,
+        email: this.msgMail,
+        is_deputy: this.isDeputy,
+      };
 
-      console.log(typeUser);
-      console.log(username);
-      console.log(password);
-      console.log(name);
-      console.log(surname);
-      console.log(email);
-      console.log(isDeputy);
+      console.log(data.type);
+      console.log(data.username);
+      console.log(data.password);
+      console.log(data.name);
+      console.log(data.surname);
+      console.log(data.email);
+      console.log(data.is_deputy);
 
-    }
-  }
+      let res = await axios
+        .post("http://localhost:8080/AppUah/adduser", data)
+        .then((response) => response.status)
+        .catch(function (error) {
+          console.log(error);
+        });
+
+      if (res == 200) {
+        this.$swal({
+          title: "Usuario creado",
+          text: "El estudiante se ha creado con exito",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          allowOutsideClick: false,
+          confirmButtonText: "Volver al menú",
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            this.$router.push("/inicio");
+          }
+        });
+      } else {
+        this.$swal({
+          title: "Usuario no creado",
+          text: "El estudiante no se ha podido crear",
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonColor: "#ff0509",
+          allowOutsideClick: false,
+          confirmButtonText: "Volver al formulario",
+        });
+      }
+    },
+  },
 };
 </script>
 
