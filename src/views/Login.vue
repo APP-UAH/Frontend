@@ -97,7 +97,7 @@ export default {
       console.log(data)
       let config = {
         method: "post",
-        url: "http://localhost:8080/AppUah/login",
+        url: process.env.VUE_APP_API_URL+ "login",
         headers: {
           "Content-Type": "application/json",
         },

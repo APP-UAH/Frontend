@@ -115,7 +115,7 @@ export default {
     let user = this.$store.getters.getUser.email;
     console.log(user);
     let tempFromServer = await axios
-      .post("http://localhost:8080/AppUah/reservations/user", {
+      .post(process.env.VUE_APP_API_URL+"reservations/user", {
         username: user,
       })
       .then((res) => res.data);

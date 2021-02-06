@@ -167,7 +167,7 @@ export default {
 
       try {
         axios
-          .patch("http://localhost:8080/AppUah/reservations/update", data)
+          .patch(process.env.VUE_APP_API_URL+ "reservations/update", data)
           .then((res) => {
             console.log(res);
             this.accepted = res.data == "La reserva ha sido aceptada";

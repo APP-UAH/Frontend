@@ -217,7 +217,7 @@ export default {
 
       let config = {
         method: "patch",
-        url: "http://localhost:8080/AppUah/subjects/addsubjects",
+        url: process.env.VUE_APP_API_URL+ "subjects/addsubjects",
         headers: {
           "Content-Type": "application/json",
         },

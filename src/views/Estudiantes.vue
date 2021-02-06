@@ -198,7 +198,7 @@ export default {
       console.log(data.is_deputy);
 
       let res = await axios
-        .post("http://localhost:8080/AppUah/adduser", data)
+        .post(process.env.VUE_APP_API_URL+ "adduser", data)
         .then((response) => response.status)
         .catch(function (error) {
           console.log(error);

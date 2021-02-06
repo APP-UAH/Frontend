@@ -48,7 +48,7 @@ export default {
   },
   async beforeMount() {
     let temp = await axios
-      .get("http://localhost:8080/AppUah/reservations/pending")
+      .get(process.env.VUE_APP_API_URL+ "reservations/pending")
       .then((res) => res.data);
     this.pendingReservations = temp;
   },

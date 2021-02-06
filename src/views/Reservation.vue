@@ -184,8 +184,8 @@ export default {
       } else {
         let url =
           this.userType == 1
-            ? "http://localhost:8080/AppUah/Classrooms"
-            : "http://localhost:8080/AppUah/Libraryrooms";
+            ? process.env.VUE_APP_API_URL+ "Classrooms"
+            : process.env.VUE_APP_API_URL+ "Libraryrooms";
         try {
           let temp1 = this.date.split(".000")[0];
           let temp2 = this.endDate.split(".000")[0];
@@ -227,7 +227,7 @@ export default {
           data["plan_Subject"] = this.subjects[this.selectedSubjects].plan;
         }
         let res = await axios
-          .post("http://localhost:8080/AppUah/reservations/create", data)
+          .post(process.env.VUE_APP_API_URL+ "reservations/create", data)
           .then((res) => res);
         if (res.status == 200) {
           this.$swal({
@@ -269,7 +269,7 @@ export default {
         type: this.userType,
       };
       let temp = await axios
-        .post("http://localhost:8080/AppUah/subjects", data)
+        .post(process.env.VUE_APP_API_URL+ "subjects", data)
         .then((res) => res.data);
       for (let plan in temp) {
         temp[plan].forEach((el) => {
