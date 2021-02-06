@@ -56,7 +56,7 @@ export default {
         <div>
           <div class="grid grid-rows-1 grid-flow-row text-left">
             <input
-              v-model="message"
+              v-model="msgName"
               placeholder="Name"
               class="mx-4 text-gray-900 mx-5 text-left sm:text-xs md:text-xs lg:text-xs mb-2"
             />
@@ -75,7 +75,7 @@ export default {
         <div>
           <div class="grid grid-rows-1 grid-flow-row text-left">
             <input
-              v-model="message"
+              v-model="msgSurname"
               placeholder="Surname"
               class="mx-4 text-gray-900 mx-5 text-left sm:text-xs md:text-xs lg:text-xs mb-2"
             />
@@ -94,7 +94,7 @@ export default {
         <div>
           <div class="grid grid-rows-1 grid-flow-row text-left">
             <input
-              v-model="message"
+              v-model="msgUsername"
               placeholder="username"
               class="mx-4 text-gray-900 mx-5 text-left sm:text-xs md:text-xs lg:text-xs mb-2"
             />
@@ -113,7 +113,7 @@ export default {
         <div class="grid grid-rows-1 grid-flow-row text-left">
           <input
             id="password"
-            v-model="password"
+            v-model="msgPsw"
             placeholder="password"
             type="password"
             class="mx-4 text-gray-900 mx-5 text-left sm:text-xs md:text-xs lg:text-xs mb-2"
@@ -130,7 +130,7 @@ export default {
         <div>
           <div class="grid grid-rows-1 grid-flow-row text-left">
             <input
-              v-model="email"
+              v-model="msgMail"
               placeholder="email"
               class="mx-4 text-gray-900 mx-5 text-left sm:text-xs md:text-xs lg:text-xs mb-2"
             />
@@ -145,7 +145,7 @@ export default {
         <div>
           <input
             type="checkbox"
-            v-model="isAssociated"
+            v-model="isDeputy"
             class="mx-4 text-gray-900 mx-5 text-left sm:text-xs md:text-xs lg:text-xs mb-2 float:left"
           />
           <label class="text-left"> Delegado </label>
@@ -154,7 +154,7 @@ export default {
         <div>
           <button
             class="bg-blue-800 hover:bg-blue-900 text-white font-bold w-11/12 mt-4 py-2 px-4"
-            @click="asignarSubjects"
+            @click="asignarStudent"
           >
             Aceptar
           </button>
@@ -168,10 +168,39 @@ export default {
 import axios from "axios";
 export default {
   data: () => ({
-   
+   msgName: "",
+   msgSurname: "",
+   msgUsername: "",
+   msgPsw: "",
+   msgMail: "",
+   isDeputy: false
   }),
 
   mounted() {},
+
+  methods: {
+      async asignarStudent(){
+          let data = JSON.stringify({
+        type: "0",
+        username:       this.msgUsername,
+        password:       this.msgPsw,
+        name:           this.msgName,
+        surname:        this.msgSurname,
+        email:          this.msgMail,
+        isDeputy:       false,
+      });
+      
+
+      console.log(typeUser);
+      console.log(username);
+      console.log(password);
+      console.log(name);
+      console.log(surname);
+      console.log(email);
+      console.log(isDeputy);
+
+    }
+  }
 };
 </script>
 

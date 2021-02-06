@@ -9,7 +9,10 @@
       alt="Logo UAH"
     />
     <div class="w-full container mt-10">
-      <TarjetaPerfil :nombreUsuario="this.nombreUsuario" :rolUsuario="this.tipoUsuario"></TarjetaPerfil>
+      <TarjetaPerfil
+        :nombreUsuario="this.nombreUsuario"
+        :rolUsuario="this.tipoUsuario"
+      ></TarjetaPerfil>
       <div
         class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-6 md:gap-8 justify-center align-middle"
       >
@@ -24,7 +27,7 @@
         </div>
       </div>
     </div>
-    <div class=" inset-x-0 bottom-0 mt-10">
+    <div class="inset-x-0 bottom-0 mt-10">
       <button
         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mb-10 rounded"
         @click="Reset"
@@ -37,12 +40,12 @@
 
 <script>
 import TarjetaInicio from "../components/tarjetaInicio";
-import TarjetaPerfil from "../components/tarjetaPerfil"
+import TarjetaPerfil from "../components/tarjetaPerfil";
 export default {
   name: "Inicio",
   components: {
     TarjetaInicio,
-    TarjetaPerfil
+    TarjetaPerfil,
   },
   data() {
     return {
@@ -58,13 +61,20 @@ export default {
         { title: "Ver calendario", route: "/calendario" },
       ],
       acciones: [],
-      tipoUsuario: this.$store.getters.getUser.role == 2 ? "Administrador" : this.$store.getters.getUser.role == 1 ? "Profesor" : "Estudiante" ,
+      tipoUsuario:
+        this.$store.getters.getUser.role == 2
+          ? "Administrador"
+          : this.$store.getters.getUser.role == 1
+          ? "Profesor"
+          : "Estudiante",
       nombreUsuario: this.$store.getters.getUser.email,
     };
   },
   computed: {
     getAcciones: function () {
-      return this.tipoUsuario == "Administrador" ? this.accionesAdmin : this.accionesNormal;
+      return this.tipoUsuario == "Administrador"
+        ? this.accionesAdmin
+        : this.accionesNormal;
     },
   },
   methods: {

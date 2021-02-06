@@ -85,10 +85,10 @@
         </p>
        
           <div class="grid grid-rows-1 grid-flow-row text-left">
-            <select v-model="studentSelected" class="mx-4 text-gray-900 mx-5 text-left 
+            <select v-model="userSelected" class="mx-4 text-gray-900 mx-5 text-left 
                sm:text-xs md:text-xs lg:text-xs mb-2" >
               <option v-for="user in userList.filter(e => e.type == userTypeSelected)" :key="user.username" :value="user.name" >
-                {{user.name}}
+                {{user.surname}} , {{user.name}}
               </option>
             </select>
           </div>
@@ -117,7 +117,6 @@ export default {
       asignaturaSelected: [],      
       userList: [],
       userSelected:"",
-      userTypeSelected: "",
       type: [{ label: "Estudiante", value: 0}, {label: "Profesor", value: 1}],
      
     };       
@@ -167,7 +166,7 @@ export default {
   },
   
   methods: {
-    async asignarSubjects(){
+    /*async asignarSubjects(){
       console.log(this.selected);
       console.log(this.userSelected);
       console.log(this.asignaturaSelected);
@@ -180,6 +179,36 @@ export default {
       let config = {
         method: "post",
         url: "http://localhost:3000/api/assignSubject",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      let res = await axios(config)
+        .then((response) => response.data)
+        .catch(function (error) {
+          console.log(error);
+        });
+
+      console.log(res);
+      if (res.msg === "Subjects Assigned") {
+        console.log("ASIGNATURAR AGREGADAS CORRECTAMENTE")
+      }
+    }*/
+    async asignarSubjects(){
+      console.log(this.selected);
+      console.log(this.userSelected);
+      console.log(this.asignaturaSelected);
+     let data = JSON.stringify({
+        username: this.userSelected,
+        plan: this.selected,
+        subjectCodes: this.asignaturaSelected
+      });
+
+      let config = {
+        method: "patch",
+        url: "http://localhost:8080/AppUah/subjects/addsubjects",
         headers: {
           "Content-Type": "application/json",
         },

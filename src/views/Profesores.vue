@@ -56,7 +56,7 @@ export default {
         <div>
           <div class="grid grid-rows-1 grid-flow-row text-left">
             <input
-              v-model="message"
+              v-model="msgName"
               placeholder="Name"
               class="mx-4 text-gray-900 mx-5 text-left sm:text-xs md:text-xs lg:text-xs mb-2"
             />
@@ -75,7 +75,7 @@ export default {
         <div>
           <div class="grid grid-rows-1 grid-flow-row text-left">
             <input
-              v-model="message"
+              v-model="msgSurname"
               placeholder="Surname"
               class="mx-4 text-gray-900 mx-5 text-left sm:text-xs md:text-xs lg:text-xs mb-2"
             />
@@ -94,7 +94,7 @@ export default {
         <div>
           <div class="grid grid-rows-1 grid-flow-row text-left">
             <input
-              v-model="message"
+              v-model="msgUsername"
               placeholder="username"
               class="mx-4 text-gray-900 mx-5 text-left sm:text-xs md:text-xs lg:text-xs mb-2"
             />
@@ -108,12 +108,12 @@ export default {
         <p
           class="text-gray-700 mx-5 text-left text-base sm:text-sm md:text-md lg:text-md mb-4"
         >
-          Contraseña
+          Contraseña 
         </p>
         <div class="grid grid-rows-1 grid-flow-row text-left">
           <input
             id="password"
-            v-model="password"
+            v-model="msgPassword"
             placeholder="password"
             type="password"
             class="mx-4 text-gray-900 mx-5 text-left sm:text-xs md:text-xs lg:text-xs mb-2"
@@ -129,7 +129,7 @@ export default {
         <div>
           <div class="grid grid-rows-1 grid-flow-row text-left">
             <input
-              v-model="phoneNum"
+              v-model="msgPhoneNum"
               placeholder="phone number"
               class="mx-4 text-gray-900 mx-5 text-left sm:text-xs md:text-xs lg:text-xs mb-2"
             />
@@ -148,7 +148,7 @@ export default {
         <div>
           <div class="grid grid-rows-1 grid-flow-row text-left">
             <input
-              v-model="email"
+              v-model="msgEmail"
               placeholder="email"
               class="mx-4 text-gray-900 mx-5 text-left sm:text-xs md:text-xs lg:text-xs mb-2"
             />
@@ -167,7 +167,7 @@ export default {
         <div>
           <div class="grid grid-rows-1 grid-flow-row text-left">
             <input
-              v-model="departamento"
+              v-model="msgDepartamento"
               placeholder="office"
               class="mx-4 text-gray-900 mx-5 text-left sm:text-xs md:text-xs lg:text-xs mb-2"
             />
@@ -190,7 +190,7 @@ export default {
         <div>
           <button
             class="bg-blue-800 hover:bg-blue-900 text-white font-bold w-11/12 mt-4 py-2 px-4"
-            @click="asignarSubjects"
+            @click="aniadirProfesor"
           >
             Aceptar
           </button>
@@ -204,9 +204,63 @@ export default {
 import axios from "axios";
 export default {
   data: () => ({
+    msgName:         "",
+    msgSurname:      "",
+    msgUsername:     "",
+    msgPassword:     "",
+    msgPhoneNum:     "",
+    msgEmail:        "",
+    msgDepartamento: "",
+    isAssociated:    false
   }),
 
   mounted() {},
+
+  methods: {
+    async aniadirProfesor(){
+     let data = JSON.stringify({
+        type: "1",
+        username:       this.msgUsername,
+        password:       this.msgPassword,
+        name:           this.msgName,
+        surname:        this.msgSurname,
+        phone_number:   this.msgPhoneNum,
+        email:          this.msgEmail,
+        is_associated:  false,
+      });
+
+      console.log(type);
+      console.log(msgUsername);
+      console.log(password);
+      console.log(name);
+      console.log(surname);
+      console.log(phone_number);
+      console.log(email);
+      console.log(is_associated);
+
+
+
+      /*let config = {
+        method: "post",
+        url: "http://localhost:8080/AppUah/adduser",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      let res = await axios(config)
+        .then((response) => response.data)
+        .catch(function (error) {
+          console.log(error);
+        });
+
+      console.log(res);
+      if (res.data == "true") {
+        console.log("Profesor añadido a la BD")
+      }*/
+    }
+  }
 };
 </script>
 
