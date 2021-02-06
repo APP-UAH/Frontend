@@ -18,7 +18,10 @@
           slot-scope="{ event_information }"
           class="details-card"
         >
-          <p class="appointment-title text-xl"  style="font-size: 1.125rem !important">
+          <p
+            class="appointment-title text-xl"
+            style="font-size: 1.125rem !important"
+          >
             {{ event_information.data.title }}
           </p>
           <p
@@ -113,7 +116,7 @@ export default {
     console.log(user);
     let tempFromServer = await axios
       .post("http://localhost:8080/AppUah/reservations/user", {
-        username: "Alvaro",
+        username: user,
       })
       .then((res) => res.data);
 
