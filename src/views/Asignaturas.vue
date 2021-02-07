@@ -124,7 +124,7 @@ export default {
   },
   mounted() { 
     
-    /*axios.get('http://localhost:3000/api/getAllSubjects')
+    /*axios.get( process.env.VUE_APP_API_URL + 'getAllSubjects')
           .then (response => {
             
             this.selected = response.data.response.planes[0];
@@ -136,7 +136,7 @@ export default {
               this.asignaturas.push(element)
             })
           })*/
-    axios.get ('http://localhost:8080/AppUah/subjects/allsubjects')
+    axios.get (process.env.VUE_APP_API_URL + 'subjects/allsubjects')
           .then ( response => {
             this.selected = response.data.plans[0];
             response.data.plans.forEach(element =>{
@@ -150,7 +150,7 @@ export default {
                 
             }
           )
-    axios.get('http://localhost:8080/AppUah/get-all-users')
+    axios.get(process.env.VUE_APP_API_URL + 'get-all-users')
           .then (response =>{
            response.data.students.forEach( e  =>{
              this.userList.push(e)
@@ -171,36 +171,6 @@ export default {
   },
   
   methods: {
-    /*async asignarSubjects(){
-      console.log(this.selected);
-      console.log(this.userSelected);
-      console.log(this.asignaturaSelected);
-     let data = JSON.stringify({
-        username: this.userSelected,
-        plan: this.selected,
-        subjectCodes: this.asignaturaSelected
-      });
-
-      let config = {
-        method: "post",
-        url: "http://localhost:3000/api/assignSubject",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: data,
-      };
-
-      let res = await axios(config)
-        .then((response) => response.data)
-        .catch(function (error) {
-          console.log(error);
-        });
-
-      console.log(res);
-      if (res.msg === "Subjects Assigned") {
-        console.log("ASIGNATURAR AGREGADAS CORRECTAMENTE")
-      }
-    }*/
     async asignarSubjects(){
       console.log(this.selected);
       console.log(this.userSelected);
